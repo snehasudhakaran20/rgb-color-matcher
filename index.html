@@ -8,17 +8,34 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <h1 class="center-title">Original Color</h1>
+  <div class="color-display" id="targetColor"></div>
+
   <div class="container">
-    <div class="color-box left" id="targetColor"></div>
-    <div class="match-indicator" id="matchIndicator">Not Matched</div>
-    <div class="color-box right">
-      <input type="number" id="rInput" min="0" max="255" value="0">
-      <input type="number" id="gInput" min="0" max="255" value="0">
-      <input type="number" id="bInput" min="0" max="255" value="0">
-      <button onclick="updateUserColor()">Set Color</button>
-      <div id="userColorBox" class="user-color"></div>
+    <div class="half left-half">
+      <div class="display-box" id="userColorBox"></div>
+
+      <div class="sliders">
+        <label>R: <input type="range" id="rSlider" min="0" max="255" value="0" oninput="syncSlider('r')"> <input type="number" id="rInput" min="0" max="255" value="0" onchange="syncInput('r')"></label>
+        <label>G: <input type="range" id="gSlider" min="0" max="255" value="0" oninput="syncSlider('g')"> <input type="number" id="gInput" min="0" max="255" value="0" onchange="syncInput('g')"></label>
+        <label>B: <input type="range" id="bSlider" min="0" max="255" value="0" oninput="syncSlider('b')"> <input type="number" id="bInput" min="0" max="255" value="0" onchange="syncInput('b')"></label>
+      </div>
+    </div>
+
+    <div class="half right-half">
+      <div class="display-box" id="targetImage"></div>
+      <div class="buttons">
+        <button onclick="randomizeTargetColor()">Randomise Target</button>
+        <button onclick="setTargetFromUserColor()">Set as Target</button>
+      </div>
     </div>
   </div>
+
+  <div class="bottom-controls">
+    <div id="matchIndicator">Not Matched</div>
+    <button onclick="resetPage()">Reset</button>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
