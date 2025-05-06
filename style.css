@@ -1,0 +1,44 @@
+/* style.css */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: #f0f0f0;
+}
+.container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.color-box {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+.left {
+  background: #000;
+}
+.right input {
+  margin: 5px;
+  width: 60px;
+}
+.user-color {
+  width: 100px;
+  height: 100px;
+  margin-top: 15px;
+  border: 1px solid #000;
+}
+.match-indicator {
+  font-size: 24px;
+  font-weight: bold;
+  color: #444;
+}
