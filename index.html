@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,17 +7,54 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="header">
+    <h1>Original Color</h1>
+    <div class="color-display" id="targetColor"></div>
+  </div>
+
   <div class="container">
-    <div class="color-box left" id="targetColor"></div>
-    <div class="match-indicator" id="matchIndicator">Not Matched</div>
-    <div class="color-box right">
-      <input type="number" id="rInput" min="0" max="255" value="0">
-      <input type="number" id="gInput" min="0" max="255" value="0">
-      <input type="number" id="bInput" min="0" max="255" value="0">
-      <button onclick="updateUserColor()">Set Color</button>
-      <div id="userColorBox" class="user-color"></div>
+    <div class="half">
+      <div class="display-box" id="userColorBox"></div>
+      <div class="sliders">
+        <label for="rSlider">R: </label>
+        <input type="range" id="rSlider" min="0" max="255" value="0" oninput="syncSlider('r')">
+        <input type="number" id="rInput" min="0" max="255" value="0" onchange="syncInput('r')"><br>
+
+        <label for="gSlider">G: </label>
+        <input type="range" id="gSlider" min="0" max="255" value="0" oninput="syncSlider('g')">
+        <input type="number" id="gInput" min="0" max="255" value="0" onchange="syncInput('g')"><br>
+
+        <label for="bSlider">B: </label>
+        <input type="range" id="bSlider" min="0" max="255" value="0" oninput="syncSlider('b')">
+        <input type="number" id="bInput" min="0" max="255" value="0" onchange="syncInput('b')">
+      </div>
+    </div>
+
+    <div class="half">
+      <div class="display-box" id="targetImage"></div>
+      <div class="sliders">
+        <label for="rOffset">+R: </label>
+        <input type="range" id="rOffset" min="-255" max="255" value="0" oninput="updateTargetImageColor()">
+        <input type="number" id="rOffsetInput" min="-255" max="255" value="0" onchange="updateTargetImageColor()"><br>
+
+        <label for="gOffset">+G: </label>
+        <input type="range" id="gOffset" min="-255" max="255" value="0" oninput="updateTargetImageColor()">
+        <input type="number" id="gOffsetInput" min="-255" max="255" value="0" onchange="updateTargetImageColor()"><br>
+
+        <label for="bOffset">+B: </label>
+        <input type="range" id="bOffset" min="-255" max="255" value="0" oninput="updateTargetImageColor()">
+        <input type="number" id="bOffsetInput" min="-255" max="255" value="0" onchange="updateTargetImageColor()">
+      </div>
+      <button onclick="toggleTargetRGB()">Show RGB Values of Target</button>
+      <div id="targetRGBDisplay" style="margin-top:10px;"></div>
     </div>
   </div>
+
+  <div class="bottom-controls">
+    <div id="matchIndicator">Not Matched</div>
+    <button onclick="resetPage()">Reset</button>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
