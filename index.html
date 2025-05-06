@@ -1,0 +1,24 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RGB Color Matcher</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="color-box left" id="targetColor"></div>
+    <div class="match-indicator" id="matchIndicator">Not Matched</div>
+    <div class="color-box right">
+      <input type="number" id="rInput" min="0" max="255" value="0">
+      <input type="number" id="gInput" min="0" max="255" value="0">
+      <input type="number" id="bInput" min="0" max="255" value="0">
+      <button onclick="updateUserColor()">Set Color</button>
+      <div id="userColorBox" class="user-color"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
