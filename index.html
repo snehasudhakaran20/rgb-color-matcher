@@ -1,86 +1,60 @@
-function getRandomColor() {
-  return {
-    r: Math.floor(Math.random() * 256),
-    g: Math.floor(Math.random() * 256),
-    b: Math.floor(Math.random() * 256)
-  };
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RGB Color Matcher</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Original Color</h1>
+    <div class="color-display" id="targetColor"></div>
+  </div>
 
-let targetColor = getRandomColor();
-updateTargetColor();
+  <div class="container">
+    <div class="half">
+      <div class="display-box" id="userColorBox"></div>
+      <div class="sliders">
+        <label for="rSlider">R: </label>
+        <input type="range" id="rSlider" min="0" max="255" value="0" oninput="syncSlider('r')">
+        <input type="number" id="rInput" min="0" max="255" value="0" onchange="syncInput('r')"><br>
 
-function updateTargetColor() {
-  const colorBox = document.getElementById('targetColor');
-  colorBox.style.backgroundColor = `rgb(${targetColor.r}, ${targetColor.g}, ${targetColor.b})`;
-  updateTargetImageColor();
-}
+        <label for="gSlider">G: </label>
+        <input type="range" id="gSlider" min="0" max="255" value="0" oninput="syncSlider('g')">
+        <input type="number" id="gInput" min="0" max="255" value="0" onchange="syncInput('g')"><br>
 
-function updateUserColor() {
-  const r = parseInt(document.getElementById('rInput').value);
-  const g = parseInt(document.getElementById('gInput').value);
-  const b = parseInt(document.getElementById('bInput').value);
-  document.getElementById('userColorBox').style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-  checkMatch(r, g, b);
-}
+        <label for="bSlider">B: </label>
+        <input type="range" id="bSlider" min="0" max="255" value="0" oninput="syncSlider('b')">
+        <input type="number" id="bInput" min="0" max="255" value="0" onchange="syncInput('b')">
+      </div>
+    </div>
 
-function syncSlider(channel) {
-  const slider = document.getElementById(channel + 'Slider');
-  const input = document.getElementById(channel + 'Input');
-  input.value = slider.value;
-  updateUserColor();
-}
+    <div class="half">
+      <div class="display-box" id="targetImage"></div>
+      <div class="sliders">
+        <label for="rOffset">+R: </label>
+        <input type="range" id="rOffset" min="-255" max="255" value="0" oninput="updateTargetImageColor()">
+        <input type="number" id="rOffsetInput" min="-255" max="255" value="0" onchange="updateTargetImageColor()"><br>
 
-function syncInput(channel) {
-  const slider = document.getElementById(channel + 'Slider');
-  const input = document.getElementById(channel + 'Input');
-  slider.value = input.value;
-  updateUserColor();
-}
+        <label for="gOffset">+G: </label>
+        <input type="range" id="gOffset" min="-255" max="255" value="0" oninput="updateTargetImageColor()">
+        <input type="number" id="gOffsetInput" min="-255" max="255" value="0" onchange="updateTargetImageColor()"><br>
 
-function checkMatch(r, g, b) {
-  const match = (r === targetColor.r && g === targetColor.g && b === targetColor.b);
-  const indicator = document.getElementById('matchIndicator');
-  indicator.textContent = match ? '✅ Matched!' : 'Not Matched';
-  indicator.style.color = match ? 'green' : 'black';
-}
+        <label for="bOffset">+B: </label>
+        <input type="range" id="bOffset" min="-255" max="255" value="0" oninput="updateTargetImageColor()">
+        <input type="number" id="bOffsetInput" min="-255" max="255" value="0" onchange="updateTargetImageColor()">
+      </div>
+      <button onclick="toggleTargetRGB()">Show RGB Values of Target</button>
+      <div id="targetRGBDisplay" style="margin-top:10px;"></div>
+    </div>
+  </div>
 
-function randomizeTargetColor() {
-  targetColor = getRandomColor();
-  updateTargetColor();
-  updateUserColor();
-}
+  <div class="bottom-controls">
+    <div id="matchIndicator">Not Matched</div>
+    <button onclick="resetPage()">Reset</button>
+  </div>
 
-function updateTargetImageColor() {
-  const rOffset = parseInt(document.getElementById('rOffset').value || 0);
-  const gOffset = parseInt(document.getElementById('gOffset').value || 0);
-  const bOffset = parseInt(document.getElementById('bOffset').value || 0);
-  document.getElementById('rOffsetInput').value = rOffset;
-  document.getElementById('gOffsetInput').value = gOffset;
-  document.getElementById('bOffsetInput').value = bOffset;
-
-  const r = clamp(targetColor.r + rOffset);
-  const g = clamp(targetColor.g + gOffset);
-  const b = clamp(targetColor.b + bOffset);
-  document.getElementById('targetImage').style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-}
-
-function clamp(value) {
-  return Math.max(0, Math.min(255, value));
-}
-
-function toggleTargetRGB() {
-  const display = document.getElementById('targetRGBDisplay');
-  display.textContent = `R: ${targetColor.r}, G: ${targetColor.g}, B: ${targetColor.b}`;
-}
-
-function resetPage() {
-  ['r', 'g', 'b'].forEach(c => {
-    document.getElementById(c + 'Input').value = 0;
-    document.getElementById(c + 'Slider').value = 0;
-    document.getElementById(c + 'Offset').value = 0;
-    document.getElementById(c + 'OffsetInput').value = 0;
-  });
-  document.getElementById('targetRGBDisplay').textContent = '';
-  randomizeTargetColor();
-  updateUserColor();
-}
+  <script src="script.js"></script>
+</body>
+</html>
